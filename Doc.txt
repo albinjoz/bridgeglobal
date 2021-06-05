@@ -1,0 +1,82 @@
+1. Register
+	POST - http://127.0.0.1:8000/reg
+	Response - 
+{
+    "status": "SUCCESS",
+    "message": "Signup was sucessful"
+} 
+
+2. Login 
+	POST - http://127.0.0.1:8000/login
+	Response
+{
+    "status": "SUCCESS",
+    "data": {
+        "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyMjk5MDE4NywianRpIjoiNDBhN2UxNWExMWRlNDc2MWJlZDY1N2VlNDVlYzViYjAiLCJ1c2VyX2lkIjoxfQ.UDtGqroCuZkFfoU_8hx7A8drM5KxpXi_4kzMBLdUZCo",
+        "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIyOTAzNzg3LCJqdGkiOiI3NDMyYzMzYjhhMDg0ZTRjYTk0ZTY1Y2IxY2VhNDU3ZCIsInVzZXJfaWQiOjF9.R7x25N1RXD4iQ52iYMqSuOuPvkNDzZT6upYGVUjBofc",
+        "user": "1"
+    }
+}
+comment -- logging authentication is done by JWT authentication.
+
+3. Initialize my account for wallet
+	POST - http://127.0.0.1:8000/wallet/
+
+	Response - {
+    "id": 1,
+    "status": "enabled",
+    "balance": 2020.0,
+    "owned_by": 1
+}
+
+4. View my wallet balance
+	GET - http://127.0.0.1:8000/wallet/
+	Response 
+	[
+    {
+        "id": 1,
+        "status": "enabled",
+        "balance": 2020.0,
+        "owned_by": 1
+    }
+]
+
+5. Add virtual money to my wallet
+	POST - http://127.0.0.1:8000/deposit/
+	Response
+	[
+    {
+        "id": 1,
+        "deposited_at": "2021-06-04T14:37:55.207825Z",
+        "amount": 2000.0,
+        "reference_id": "50535246-dcb2-4929-8cc9-004ea06f5241",
+        "wallet_id": 1,
+        "deposited_by": 1
+    },
+]
+
+6. Use virtual money from my wallet
+	POST - http://127.0.0.1:8000/withdraw/
+	Response
+		[
+    {
+        "id": 1,
+        "withdrawn_at": "2021-06-04T14:38:36.356306Z",
+        "amount": 100.0,
+        "reference_id": "50535246-dcb2-4929-8cc9-004ea06f5241",
+        "wallet_id": 1,
+        "withdrawn_by": 1
+    }
+]
+
+7. Disable my wallet
+	PATCH - http://127.0.0.1:8000/wallet/1/
+	Response 
+[
+    {
+        "id": 1,
+        "status": "disabled",
+        "balance": 4020.0,
+        "owned_by": 1
+    }
+]
